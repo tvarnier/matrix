@@ -1,0 +1,2 @@
+vfmadd132ps, vfmadd213ps and vfmadd231ps
+Fused Multiply-Accumulate operations
