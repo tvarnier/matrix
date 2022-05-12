@@ -1,6 +1,7 @@
 use std::convert::From;
 use std::fmt;
 
+#[derive(Clone)]
 pub struct Vector<K>
 where
     K: Copy,
