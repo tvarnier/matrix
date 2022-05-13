@@ -49,3 +49,5 @@ mod sub;
 mod scl;
 mod linear_combination;
 mod lerp;
+mod dot;
+mod norm;
