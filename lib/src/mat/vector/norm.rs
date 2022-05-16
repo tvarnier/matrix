@@ -6,30 +6,20 @@ where
     K: Float
         + std::default::Default
 {
-    pub fn norm_1(&mut self) -> K {
+    pub fn norm_1(&self) -> K {
         let mut res: K = Default::default();
         for id in 0..self.array.len() {
-            res = res + self.array[id];
+            res = res + self.array[id].abs();
         }
         return res;
     }
 
-    pub fn norm(&mut self) -> K {
-        let mut res: K = Default::default();
-        for id in 0..self.array.len() {
-            match K::from(2.) {
-                Some(p) => res = res + self.array[id].powf(p),
-                None => return Float::nan(),
-            }   
-        }
-        return res.sqrt();
+    pub fn norm(&self) -> K {
+        return self.sum_square().sqrt();
     }
 
-    pub fn norm_inf(&mut self) -> K {
-        match self.array.iter().copied().fold(Float::neg_infinity(), Float::max_value()) {
-            Some(max) => max,
-            None => Float::nan(),
-        }
+    pub fn norm_inf(& self) -> K {
+        self.array.iter().map(|&x| x.abs()).fold(Float::neg_infinity(), |a, b| a.max(b))
     }
 }
 

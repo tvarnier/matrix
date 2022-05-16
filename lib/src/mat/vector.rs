@@ -44,6 +44,7 @@ where
     }
 }
 
+mod utils;
 mod add;
 mod sub;
 mod scl;
@@ -51,3 +52,5 @@ mod linear_combination;
 mod lerp;
 mod dot;
 mod norm;
+mod angle_cos;
+mod cross_product;
