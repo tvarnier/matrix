@@ -1,6 +1,7 @@
 use num_traits::Float;
 use std::fmt;
 
+#[derive(Clone)]
 pub struct Matrix<K>
 where
     K: Float
@@ -66,3 +67,5 @@ mod lerp;
 mod mul;
 mod trace;
 mod transpose;
+mod row_echelon;
+mod determinant;

@@ -1,29 +1,53 @@
-function ToReducedRowEchelonForm(Matrix M) is
-    lead := 0
-    rowCount := the number of rows in M
-    columnCount := the number of columns in M
-    for 0 ≤ r < rowCount do
-        if columnCount ≤ lead then
-            stop function
-        end if
-        i = r
-        while M[i, lead] = 0 do
-            i = i + 1
-            if rowCount = i then
-                i = r
-                lead = lead + 1
-                if columnCount = lead then
-                    stop function
-                end if
-            end if
-        end while
-        if i ≠ r then Swap rows i and r
-        Divide row r by M[r, lead]
-        for 0 ≤ i < rowCount do
-            if i ≠ r do
-                Subtract M[i, lead] multiplied by row r from row i
-            end if
-        end for
-        lead = lead + 1
-    end for
-end function
+use super::Matrix;
+use num_traits::Float;
+
+impl<K> Matrix<K>
+where
+    K: Float
+        + std::fmt::Debug
+        + std::default::Default
+{
+    pub fn row_echelon(&self) -> Matrix<K> {
+        let mut res: Matrix<K> = self.clone();
+
+        let mut lead: usize = 0;
+        let mut row_count: usize = self.row;
+        let mut col_count: usize = self.col;
+
+        for r in 0..row_count {
+            if col_count <= lead { return res; }
+            let mut i = r;
+            while res.array[i][lead] == Default::default() {
+                i = i + 1;
+                if row_count == i  {
+                    i = r;
+                    lead = lead + 1;
+                    if col_count == lead {
+                        return res;
+                    }
+                }
+            }
+
+            if i != r {
+                res.array.swap(i, r);
+            }
+
+            let div: K = res.array[r][lead];
+            for x in 0..res.array[r].len() {
+                res.array[r][x] = res.array[r][x] / div;
+            }
+
+            for i in 0..row_count {
+                if i != r {
+                    let l : K = res.array[i][lead];
+                    for x in 0..res.array[i].len() {
+                        res.array[i][x] = res.array[i][x] - l * res.array[r][x];
+                    }
+                }
+            }
+
+            lead = lead + 1;
+        }
+        return res;
+    }
+}
