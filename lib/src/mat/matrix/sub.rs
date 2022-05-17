@@ -7,7 +7,7 @@ where
         + std::ops::Sub<Output = K>
 {
     pub fn sub(&mut self, v: &Matrix<K>) {
-        if self.size == v.size {
+        if self.col == v.col && self.row == v.row {
             for x in 0..self.array.len() {
                 for y in 0..self.array[x].len() {
                     self.array[x][y] = self.array[x][y] - v.array[x][y];

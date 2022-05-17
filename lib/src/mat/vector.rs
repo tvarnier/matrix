@@ -5,7 +5,7 @@ pub struct Vector<K>
 where
     K: Float
 {
-    array: Vec<K>,
+    pub array: Vec<K>,
     pub size: usize,
 }
 

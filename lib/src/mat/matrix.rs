@@ -5,9 +5,9 @@ pub struct Matrix<K>
 where
     K: Float
 {
-    array: Vec<Vec<K>>,
-    pub size: usize,
-    pub length: usize,
+    pub array: Vec<Vec<K>>,
+    pub row: usize,
+    pub col: usize,
 }
 
 impl<K> fmt::Display for Matrix<K>
@@ -27,22 +27,30 @@ where
         + std::default::Default
 {
     pub fn from<Arr: AsRef<[Row]>, Row: AsRef<[K]>>(array_values: Arr) -> Matrix<K> {
-        Matrix {
-            size: array_values.as_ref().len(),
-            length: array_values.as_ref().len(),
-            array: array_values
-                .as_ref()
-                .iter()
-                .map(|x| Vec::from(x.as_ref()))
-                .collect(),
+        
+        
+        if array_values.as_ref().len() > 0 {
+            let s = array_values.as_ref()[0].as_ref().len();
+            if array_values.as_ref().iter().all(|a| a.as_ref().len() == s) {
+                return Matrix {
+                    row: array_values.as_ref().len(),
+                    col: s,
+                    array: array_values
+                        .as_ref()
+                        .iter()
+                        .map(|x| Vec::from(x.as_ref()))
+                        .collect(),
+                };
+            }
         }
+        return Matrix::zero(0,0);
     }
 
-    pub fn zero(size: usize, length: usize) -> Matrix<K> {
+    pub fn zero(row: usize, col: usize) -> Matrix<K> {
         Matrix {
-            size: size,
-            length: length,
-            array: vec![vec![Default::default(); size]; length],
+            row: row,
+            col: col,
+            array: vec![vec![Default::default(); col]; row],
         }
     }
 
@@ -55,3 +63,6 @@ mod add;
 mod sub;
 mod scl;
 mod lerp;
+mod mul;
+mod trace;
+mod transpose;
