@@ -3,7 +3,7 @@ use std::fmt;
 
 pub struct Vector<K>
 where
-    K: Float
+    K: Float,
 {
     pub array: Vec<K>,
     pub size: usize,
@@ -11,8 +11,7 @@ where
 
 impl<K> fmt::Display for Vector<K>
 where
-    K: Float
-        + std::fmt::Debug
+    K: Float + std::fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self.array)
@@ -21,9 +20,7 @@ where
 
 impl<K> Vector<K>
 where
-    K: Float
-        + std::fmt::Debug
-        + std::default::Default
+    K: Float + std::fmt::Debug + std::default::Default,
 {
     pub fn from<Arr: AsRef<[K]>>(array_values: Arr) -> Vector<K> {
         Vector {
@@ -35,7 +32,7 @@ where
     pub fn zero(size: usize) -> Vector<K> {
         Vector {
             size: size,
-            array: vec![Default::default(); size]
+            array: vec![Default::default(); size],
         }
     }
 
@@ -44,13 +41,13 @@ where
     }
 }
 
-mod utils;
 mod add;
-mod sub;
-mod scl;
-mod linear_combination;
-mod lerp;
-mod dot;
-mod norm;
 mod angle_cos;
 mod cross_product;
+mod dot;
+mod lerp;
+mod linear_combination;
+mod norm;
+mod scl;
+mod sub;
+mod utils;

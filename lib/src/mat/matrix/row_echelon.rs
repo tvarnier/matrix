@@ -3,9 +3,7 @@ use num_traits::Float;
 
 impl<K> Matrix<K>
 where
-    K: Float
-        + std::fmt::Debug
-        + std::default::Default
+    K: Float + std::fmt::Debug + std::default::Default,
 {
     pub fn row_echelon(&self) -> Matrix<K> {
         let mut res: Matrix<K> = self.clone();
@@ -15,11 +13,13 @@ where
         let mut col_count: usize = self.col;
 
         for r in 0..row_count {
-            if col_count <= lead { return res; }
+            if col_count <= lead {
+                return res;
+            }
             let mut i = r;
             while res.array[i][lead] == Default::default() {
                 i = i + 1;
-                if row_count == i  {
+                if row_count == i {
                     i = r;
                     lead = lead + 1;
                     if col_count == lead {
@@ -39,7 +39,7 @@ where
 
             for i in 0..row_count {
                 if i != r {
-                    let l : K = res.array[i][lead];
+                    let l: K = res.array[i][lead];
                     for x in 0..res.array[i].len() {
                         res.array[i][x] = res.array[i][x] - l * res.array[r][x];
                     }

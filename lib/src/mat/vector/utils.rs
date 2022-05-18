@@ -3,8 +3,7 @@ use num_traits::Float;
 
 impl<K> Vector<K>
 where
-    K: Float
-        + std::default::Default
+    K: Float + std::default::Default,
 {
     pub fn sum_square(&self) -> K {
         let mut res: K = Default::default();

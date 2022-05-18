@@ -3,8 +3,7 @@ use num_traits::Float;
 
 impl<K> Matrix<K>
 where
-    K: Float
-        + std::ops::Add<Output = K>
+    K: Float + std::ops::Add<Output = K>,
 {
     pub fn add(&mut self, v: &Matrix<K>) {
         if self.col == v.col && self.row == v.row {

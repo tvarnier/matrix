@@ -3,8 +3,7 @@ use num_traits::Float;
 
 impl<K> Vector<K>
 where
-    K: Float
-        + std::ops::Sub<Output = K>
+    K: Float + std::ops::Sub<Output = K>,
 {
     pub fn sub(&mut self, v: &Vector<K>) {
         if self.size == v.size {

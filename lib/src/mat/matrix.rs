@@ -4,7 +4,7 @@ use std::fmt;
 #[derive(Clone)]
 pub struct Matrix<K>
 where
-    K: Float
+    K: Float,
 {
     pub array: Vec<Vec<K>>,
     pub row: usize,
@@ -13,8 +13,7 @@ where
 
 impl<K> fmt::Display for Matrix<K>
 where
-    K: Float 
-        + std::fmt::Debug,
+    K: Float + std::fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self.array)
@@ -23,13 +22,9 @@ where
 
 impl<K> Matrix<K>
 where
-    K: Float
-        + std::fmt::Debug
-        + std::default::Default
+    K: Float + std::fmt::Debug + std::default::Default,
 {
     pub fn from<Arr: AsRef<[Row]>, Row: AsRef<[K]>>(array_values: Arr) -> Matrix<K> {
-        
-        
         if array_values.as_ref().len() > 0 {
             let s = array_values.as_ref()[0].as_ref().len();
             if array_values.as_ref().iter().all(|a| a.as_ref().len() == s) {
@@ -44,7 +39,7 @@ where
                 };
             }
         }
-        return Matrix::zero(0,0);
+        return Matrix::zero(0, 0);
     }
 
     pub fn zero(row: usize, col: usize) -> Matrix<K> {
@@ -61,11 +56,13 @@ where
 }
 
 mod add;
-mod sub;
-mod scl;
+mod determinant;
+mod inverse;
 mod lerp;
 mod mul;
+mod rank;
+mod row_echelon;
+mod scl;
+mod sub;
 mod trace;
 mod transpose;
-mod row_echelon;
-mod determinant;

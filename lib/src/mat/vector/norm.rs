@@ -3,8 +3,7 @@ use num_traits::Float;
 
 impl<K> Vector<K>
 where
-    K: Float
-        + std::default::Default
+    K: Float + std::default::Default,
 {
     pub fn norm_1(&self) -> K {
         let mut res: K = Default::default();
@@ -18,9 +17,10 @@ where
         return self.sum_square().sqrt();
     }
 
-    pub fn norm_inf(& self) -> K {
-        self.array.iter().map(|&x| x.abs()).fold(Float::neg_infinity(), |a, b| a.max(b))
+    pub fn norm_inf(&self) -> K {
+        self.array
+            .iter()
+            .map(|&x| x.abs())
+            .fold(Float::neg_infinity(), |a, b| a.max(b))
     }
 }
-
-
