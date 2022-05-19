@@ -6,7 +6,7 @@ where
     K: Float + std::fmt::Debug + std::default::Default + std::fmt::Display,
 {
     pub fn determinant(&self) -> K {
-        if self.row == self.col {
+        if self.is_square() {
             if self.row == 1 {
                 return self.array[0][0];
             }

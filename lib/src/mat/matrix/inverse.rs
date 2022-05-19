@@ -13,7 +13,7 @@ where
     }
 
     pub fn inverse(&self) -> Result<Matrix<K>, String> {
-        if self.row == self.col {
+        if self.is_square() {
             let mut augmented_mat: Matrix<K> = Matrix::zero(self.row, self.col * 2);
             for r in 0..self.row {
                 for c in 0..(self.col * 2) {

@@ -53,6 +53,10 @@ where
     pub fn to_string(&self) -> String {
         format!("{:?}", self.array)
     }
+
+    pub fn is_square(&self) -> bool {
+        self.col == self.row
+    }
 }
 
 mod add;
