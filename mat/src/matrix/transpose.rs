@@ -1,5 +1,4 @@
 use super::Matrix;
-use crate::Vector;
 use num_traits::Float;
 
 impl<K> Matrix<K>

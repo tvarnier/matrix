@@ -1,6 +1,7 @@
 use num_traits::Float;
 use std::fmt;
 
+#[derive(Debug)]
 pub struct Vector<K>
 where
     K: Float,
@@ -9,12 +10,27 @@ where
     pub size: usize,
 }
 
+impl<K> PartialEq for Vector<K>
+where
+    K: Float,
+{
+    fn eq(&self, other: &Self) -> bool {
+        self.size == other.size && self.array == other.array
+    }
+}
+
 impl<K> fmt::Display for Vector<K>
 where
     K: Float + std::fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", self.array)
+        write!(
+            f,
+            "{:?}",
+            format!("{:?}", self.array)
+                .replace("[", "")
+                .replace("]", "")
+        )
     }
 }
 
@@ -38,6 +54,8 @@ where
 
     pub fn to_string(&self) -> String {
         format!("{:?}", self.array)
+            .replace("[", "")
+            .replace("]", "")
     }
 }
 

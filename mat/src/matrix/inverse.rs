@@ -5,7 +5,7 @@ impl<K> Matrix<K>
 where
     K: Float + std::fmt::Debug + std::default::Default,
 {
-    fn fromFloat(f: f64) -> K {
+    fn from_float(f: f64) -> K {
         match K::from(f) {
             Some(res) => res,
             _ => Default::default(),
@@ -21,9 +21,9 @@ where
                         augmented_mat.array[r][c] = self.array[r][c];
                     } else {
                         augmented_mat.array[r][c] = if c == self.col + r {
-                            Matrix::fromFloat(1.)
+                            Matrix::from_float(1.)
                         } else {
-                            Matrix::fromFloat(0.)
+                            Matrix::from_float(0.)
                         };
                     }
                 }

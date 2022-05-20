@@ -1,7 +1,7 @@
 use num_traits::Float;
 use std::fmt;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Matrix<K>
 where
     K: Float,
@@ -11,12 +11,28 @@ where
     pub col: usize,
 }
 
+impl<K> PartialEq for Matrix<K>
+where
+    K: Float,
+{
+    fn eq(&self, other: &Self) -> bool {
+        self.row == other.row && self.col == other.col && self.array == other.array
+    }
+}
+
 impl<K> fmt::Display for Matrix<K>
 where
     K: Float + std::fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", self.array)
+        write!(
+            f,
+            "{}",
+            format!("{:?}", self.array)
+                .replace("], [", "\n")
+                .replace("[", "")
+                .replace("]", "")
+        )
     }
 }
 
@@ -52,6 +68,9 @@ where
 
     pub fn to_string(&self) -> String {
         format!("{:?}", self.array)
+            .replace("], [", "\n")
+            .replace("[", "")
+            .replace("]", "")
     }
 
     pub fn is_square(&self) -> bool {

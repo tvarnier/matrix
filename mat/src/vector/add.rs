@@ -13,3 +13,16 @@ where
         }
     }
 }
+
+#[cfg(test)]
+mod ex00 {
+    use crate::vector::Vector;
+
+    #[test]
+    fn add() {
+        let mut u: Vector<f64> = Vector::from([2., 3.]);
+        let v: Vector<f64> = Vector::from([5., 7.]);
+        u.add(&v);
+        assert_eq!(u, Vector::from([7., 10.]));
+    }
+}

@@ -9,8 +9,8 @@ where
         let mut res: Matrix<K> = self.clone();
 
         let mut lead: usize = 0;
-        let mut row_count: usize = self.row;
-        let mut col_count: usize = self.col;
+        let row_count: usize = self.row;
+        let col_count: usize = self.col;
 
         for r in 0..row_count {
             if col_count <= lead {
