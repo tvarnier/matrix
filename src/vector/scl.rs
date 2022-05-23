@@ -11,3 +11,15 @@ where
         }
     }
 }
+
+#[cfg(test)]
+mod ex00 {
+    use crate::vector::Vector;
+
+    #[test]
+    fn basic() {
+        let mut u: Vector<f64> = Vector::from([2., 3.]);
+        u.scl(2.);
+        assert_eq!(u, Vector::from([4., 6.]));
+    }
+}

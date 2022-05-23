@@ -19,10 +19,26 @@ mod ex00 {
     use crate::vector::Vector;
 
     #[test]
-    fn sub() {
+    fn basic() {
         let mut u: Vector<f64> = Vector::from([2., 3.]);
         let v: Vector<f64> = Vector::from([5., 7.]);
         u.sub(&v);
         assert_eq!(u, Vector::from([-3., -4.]));
+    }
+
+    #[test]
+    fn smaller_size() {
+        let mut u: Vector<f64> = Vector::from([2., 3.]);
+        let v: Vector<f64> = Vector::from([5.]);
+        u.sub(&v);
+        assert_eq!(u, Vector::from([2., 3.]));
+    }
+
+    #[test]
+    fn greater_size() {
+        let mut u: Vector<f64> = Vector::from([2., 3.]);
+        let v: Vector<f64> = Vector::from([5., 7., 9.]);
+        u.sub(&v);
+        assert_eq!(u, Vector::from([2., 3.]));
     }
 }

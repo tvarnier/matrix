@@ -26,11 +26,39 @@ pub fn projection(fov: f32, ratio: f32, near: f32, far: f32) -> Matrix<f32> {
 }
 
 #[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        println!("TESTTTTT");
-        let result = 2 + 2;
-        assert_eq!(result, 4);
+mod ex02 {
+    #[cfg(test)]
+    mod lerp {
+        use crate::lerp;
+
+        #[test]
+        fn basic() {
+            assert_eq!(0., lerp(0., 1., 0.));
+            assert_eq!(1., lerp(0., 1., 1.));
+            assert_eq!(0.5, lerp(0., 1., 0.5));
+            assert_eq!(27.3, lerp(21., 42., 0.3));
+        }
+    }
+}
+
+#[cfg(test)]
+mod ex14 {
+    #[cfg(test)]
+    mod projection {
+        use crate::projection;
+        use crate::Matrix;
+
+        #[test]
+        fn basic() {
+            assert_eq!(
+                Matrix::from([
+                    [0.57735026, 0.0, 0.0, 0.0],
+                    [0.0, 0.57735026, 0.0, 0.0],
+                    [0.0, 0.0, -1.2222222, -1.0],
+                    [0.0, 0.0, -2.2222223, 0.0]
+                ]),
+                projection(120., 1., 1., 10.)
+            );
+        }
     }
 }

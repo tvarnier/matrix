@@ -13,3 +13,15 @@ where
         }
     }
 }
+
+#[cfg(test)]
+mod ex00 {
+    use crate::matrix::Matrix;
+
+    #[test]
+    fn basic() {
+        let mut u = Matrix::from([[1., 2.], [3., 4.]]);
+        u.scl(2.);
+        assert_eq!(Matrix::from([[2., 4.], [6., 8.]]), u);
+    }
+}
