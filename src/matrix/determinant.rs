@@ -3,7 +3,7 @@ use num_traits::Float;
 
 impl<K> Matrix<K>
 where
-    K: Float + std::fmt::Debug + std::default::Default + std::fmt::Display,
+    K: Float + std::fmt::Debug + std::default::Default,
 {
     pub fn determinant(&self) -> K {
         if self.is_square() {

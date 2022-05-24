@@ -13,7 +13,7 @@ where
     }
 
     pub fn inverse(&self) -> Option<Matrix<K>> {
-        if self.is_square() {
+        if self.is_square() && self.determinant() != Default::default() {
             let mut augmented_mat: Matrix<K> = Matrix::zero(self.row, self.col * 2);
             for r in 0..self.row {
                 for c in 0..(self.col * 2) {
@@ -93,6 +93,12 @@ mod ex12 {
         assert_eq!(None, u.inverse());
 
         let u: Matrix<f64> = Matrix::from([[1., 2., 3.], [-1., -2., -3.]]);
+        assert_eq!(None, u.inverse());
+    }
+
+    #[test]
+    fn zero_determinant() {
+        let u: Matrix<f64> = Matrix::from([[29., 4., -2.], [21., 6., 2.], [49., 8., -2.]]);
         assert_eq!(None, u.inverse());
     }
 }

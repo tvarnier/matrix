@@ -23,6 +23,8 @@ mod ex13 {
 
     #[test]
     fn basic() {
+        let u = Matrix::from([[1., 2., 3.], [2., 4., 6.], [4., 8., 12.]]);
+        assert_eq!(1, u.rank());
         let u = Matrix::from([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
         assert_eq!(3, u.rank());
         let u = Matrix::from([[1., 2., 0., 0.], [2., 4., 0., 0.], [-1., 2., 1., 1.]]);
